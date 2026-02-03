@@ -4,7 +4,7 @@
 
 ## 📊 Current Statistics
 
-**Last Updated:** 2026-02-03 03:54:17 UTC
+**Last Updated:** 2026-02-03 04:52:33 UTC
 
 ### Upcoming Matches
 - **Total matches with odds:** 0/0
@@ -12,11 +12,11 @@
 - **Most frequent teams:** None
 
 ### Historical Results  
-- **Total matches collected:** 200
-- **Enriched with details:** 200 (100.0%)
+- **Total matches collected:** 0
+- **Enriched with details:** 0 (0.0%)
 - **Date range:** None to None
-- **Top events:** Exort Cataclysm Season 1, FiRe CONTER Season 1, CCT Season 3 Europe Series 14
-- **Most played maps:** Dust2, Nuke, Ancient
+- **Top events:** None
+- **Most played maps:** None
 
 ## 🔄 Automation
 
