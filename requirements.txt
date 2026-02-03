@@ -1,0 +1,9 @@
+python-utils==2.0.0
+requests==2.31.0
+beautifulsoup4==4.11.1
+lxml
+tzlocal==4.2
+pandas
+matplotlib
+seaborn
+jsonschema
