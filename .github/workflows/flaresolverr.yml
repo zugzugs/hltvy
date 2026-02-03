@@ -11,7 +11,7 @@ on:
 jobs:
   data-collection:
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 45
     
     steps:
     - name: Checkout repository
@@ -63,6 +63,18 @@ jobs:
         echo "Starting results collection..."
         python datagatherer_results.py
         echo "Results collection completed"
+        
+        # Check if we have results
+        if [ -f "results.json" ]; then
+          RESULTS_COUNT=$(jq length results.json 2>/dev/null || echo "0")
+          echo "Collected results: $RESULTS_COUNT"
+          
+          # Run recovery helper if results seem problematic
+          if [ "$RESULTS_COUNT" -eq "0" ] && [ -f "scrape_state.json" ]; then
+            echo "No results found, checking for recovery options..."
+            python scripts/recovery_helper.py --auto-fix || true
+          fi
+        fi
       continue-on-error: true
 
     - name: Generate data summary
@@ -105,7 +117,7 @@ jobs:
 
     - name: Upload artifacts on failure
       if: failure()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
         name: debug-logs-${{ github.run_number }}
         path: |
