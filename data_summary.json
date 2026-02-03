@@ -1,0 +1,64 @@
+{
+  "upcoming": {
+    "total_matches": 0,
+    "matches_with_odds": 0,
+    "bookmakers": {},
+    "teams": {},
+    "last_updated": "2026-02-03T03:54:17.474719"
+  },
+  "results": {
+    "total_matches": 200,
+    "enriched_matches": 200,
+    "events": {
+      "Exort Cataclysm Season 1": 28,
+      "FiRe CONTER Season 1": 27,
+      "CCT Season 3 Europe Series 14": 24,
+      "NODWIN Clutch Series 4": 20,
+      "IEM Kraków 2026 Stage 1": 20,
+      "IEM Kraków 2026": 18,
+      "European Pro League Series 4": 14,
+      "CCT Season 3 Europe Series 13": 14,
+      "DFRAG Open Series 3": 10,
+      "A1 Gaming League Season 11": 6
+    },
+    "teams": {
+      "Nemiga": 10,
+      "ex-RUBY": 10,
+      "FAVBET": 9,
+      "Fingers Crossed": 9,
+      "1win": 9,
+      "BET-M": 8,
+      "ARCRED": 8,
+      "Nemesis": 7,
+      "MOUZ NXT": 7,
+      "FUT": 6,
+      "Astralis": 6,
+      "Nuclear TigeRES": 6,
+      "FORZE Reload": 6,
+      "magic": 6,
+      "RED Canids": 6,
+      "BC.Game": 5,
+      "Aurora": 5,
+      "WHITEBIRD": 5,
+      "RUSTEC": 5,
+      "Johnny Speeds": 5
+    },
+    "date_range": {
+      "earliest": null,
+      "latest": null
+    },
+    "maps_played": {
+      "Dust2": 102,
+      "Nuke": 102,
+      "Ancient": 101,
+      "Mirage": 98,
+      "Overpass": 67,
+      "Inferno": 64,
+      "Anubis": 46,
+      "Default": 9,
+      "Train": 1
+    },
+    "last_updated": "2026-02-03T03:54:17.486845"
+  },
+  "generated_at": "2026-02-03T03:54:17.487814"
+}
