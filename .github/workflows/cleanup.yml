@@ -1,0 +1,77 @@
+name: Data Cleanup & Maintenance
+
+on:
+  schedule:
+    - cron: '0 2 * * 0'  # Weekly on Sunday at 2 AM UTC
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run data cleanup
+      run: python scripts/cleanup_data.py
+
+    - name: Archive old data
+      run: |
+        # Create archive directory if it doesn't exist
+        mkdir -p archive/$(date +%Y)/$(date +%m)
+        
+        # Archive old state files if they exist
+        if [ -f "scrape_state.json" ]; then
+          cp scrape_state.json "archive/$(date +%Y)/$(date +%m)/scrape_state_$(date +%Y%m%d).json"
+        fi
+        
+        if [ -f "failed_urls.json" ]; then
+          cp failed_urls.json "archive/$(date +%Y)/$(date +%m)/failed_urls_$(date +%Y%m%d).json"
+        fi
+
+    - name: Clean up temporary files
+      run: |
+        # Remove temporary files older than 7 days
+        find . -name "*.tmp" -mtime +7 -delete || true
+        find . -name "*.log" -mtime +7 -delete || true
+        
+        # Clean up failed URLs file if it's too large
+        if [ -f "failed_urls.json" ] && [ $(wc -l < failed_urls.json) -gt 1000 ]; then
+          tail -500 failed_urls.json > failed_urls_temp.json
+          mv failed_urls_temp.json failed_urls.json
+        fi
+
+    - name: Optimize JSON files
+      run: python scripts/optimize_json.py
+
+    - name: Commit cleanup changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        git add -A
+        if ! git diff --staged --quiet; then
+          git commit -m "🧹 Weekly data cleanup and optimization
+          
+          - Archived old state files
+          - Cleaned up temporary files
+          - Optimized JSON file sizes
+          - Performed data maintenance
+          
+          Automated cleanup on $(date -u +"%Y-%m-%d %H:%M:%S UTC")"
+          git push
+        fi

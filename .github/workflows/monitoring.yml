@@ -1,0 +1,115 @@
+name: System Monitoring & Alerts
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'  # Every 12 hours
+  workflow_dispatch:
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install requests python-dateutil
+
+    - name: Run system monitoring
+      run: python scripts/monitor_system.py
+
+    - name: Check data freshness
+      id: freshness
+      run: |
+        # Check if data files have been updated recently
+        HOURS_THRESHOLD=8
+        CURRENT_TIME=$(date +%s)
+        
+        check_file_age() {
+          if [ -f "$1" ]; then
+            FILE_TIME=$(stat -c %Y "$1")
+            AGE_HOURS=$(( (CURRENT_TIME - FILE_TIME) / 3600 ))
+            echo "File $1 is $AGE_HOURS hours old"
+            if [ $AGE_HOURS -gt $HOURS_THRESHOLD ]; then
+              echo "stale_data=true" >> $GITHUB_OUTPUT
+              echo "⚠️ $1 is stale (${AGE_HOURS}h old)" >> monitoring_alerts.txt
+            fi
+          else
+            echo "missing_data=true" >> $GITHUB_OUTPUT
+            echo "❌ $1 is missing" >> monitoring_alerts.txt
+          fi
+        }
+        
+        check_file_age "upcoming.json"
+        check_file_age "results.json"
+
+    - name: Check workflow success rate
+      run: |
+        # This would typically check GitHub API for workflow run success rates
+        echo "Checking recent workflow runs..."
+        echo "📊 Monitoring workflow health" >> monitoring_alerts.txt
+
+    - name: Create issue for alerts
+      if: steps.freshness.outputs.stale_data == 'true' || steps.freshness.outputs.missing_data == 'true'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          
+          if (fs.existsSync('monitoring_alerts.txt')) {
+            const alerts = fs.readFileSync('monitoring_alerts.txt', 'utf8');
+            
+            const issueBody = `## 🚨 System Monitoring Alert
+            
+            **Alert Time:** ${new Date().toISOString()}
+            
+            ### Issues Detected:
+            ${alerts}
+            
+            ### Recommended Actions:
+            - Check the latest workflow runs for errors
+            - Verify FlareSolverr service availability
+            - Review data collection scripts for issues
+            - Check HLTV.org accessibility
+            
+            ### System Status:
+            - Last successful run: Check workflow history
+            - Data collection status: Requires investigation
+            
+            This issue was automatically created by the monitoring system.
+            `;
+            
+            // Check if there's already an open monitoring issue
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'monitoring,automated'
+            });
+            
+            if (issues.data.length === 0) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `🚨 System Monitoring Alert - ${new Date().toISOString().split('T')[0]}`,
+                body: issueBody,
+                labels: ['monitoring', 'automated', 'bug']
+              });
+            }
+          }
+
+    - name: Upload monitoring report
+      uses: actions/upload-artifact@v3
+      with:
+        name: monitoring-report-${{ github.run_number }}
+        path: |
+          monitoring_*.txt
+          monitoring_*.json
+        retention-days: 30

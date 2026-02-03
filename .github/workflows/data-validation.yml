@@ -1,0 +1,58 @@
+name: Data Validation & Quality Check
+
+on:
+  push:
+    branches: [main]
+    paths: ['*.json']
+  pull_request:
+    paths: ['*.json']
+  schedule:
+    - cron: '0 12 * * *'  # Daily at noon UTC
+
+jobs:
+  validate-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install validation dependencies
+      run: |
+        pip install jsonschema pandas matplotlib seaborn
+
+    - name: Validate JSON files
+      run: python scripts/validate_data.py
+
+    - name: Generate data quality report
+      run: python scripts/quality_report.py
+
+    - name: Upload quality report
+      uses: actions/upload-artifact@v3
+      with:
+        name: data-quality-report
+        path: |
+          data_quality_report.html
+          *.png
+        retention-days: 30
+
+    - name: Comment on PR with validation results
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          if (fs.existsSync('validation_summary.txt')) {
+            const summary = fs.readFileSync('validation_summary.txt', 'utf8');
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 📊 Data Validation Results\n\n${summary}`
+            });
+          }
