@@ -304,10 +304,20 @@ def parse_match_details(soup):
         team2 = results.find("span", class_="results-right")
 
         def parse_team(team):
+            classes = team.get("class", [])
+            if "won" in classes:
+                status = "won"
+            elif "lost" in classes:
+                status = "lost"
+            elif "tie" in classes:
+                status = "tie"
+            else:
+                status = "unknown"
+            
             return {
                 "name": team.find("div", class_="results-teamname").text.strip(),
                 "score": team.find("div", class_="results-team-score").text.strip(),
-                "status": "won" if "won" in team.get("class", []) else "lost",
+                "status": status,
             }
 
         half = results.find("div", class_="results-center-half-score")
@@ -321,6 +331,7 @@ def parse_match_details(soup):
         data["maps"].append(map_data)
 
     return data
+
 
 # ================== PLAYER STATS ================== #
 
