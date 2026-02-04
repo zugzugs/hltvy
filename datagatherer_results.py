@@ -13,7 +13,7 @@ import tzlocal
 # ================== CONFIG ================== #
 
 MAX_RUNTIME_SECONDS = 60 * 300
-MAX_RESULTS_OFFSET = 2000
+MAX_RESULTS_OFFSET = 100
 
 STATE_FILE = "scrape_state.json"
 RESULTS_FILE = "results.json"
@@ -179,24 +179,6 @@ def get_results(state):
                         "url": "https://hltv.org" + href,
                     }
 
-                    # Parse date
-                    headline = section.find("span", class_="standard-headline")
-                    if headline:
-                        txt = headline.text.replace("Results for ", "")
-                        for s in ["th", "rd", "st", "nd"]:
-                            txt = txt.replace(s, "")
-                        try:
-                            m, d, y = txt.split()
-                            dt = datetime.datetime(
-                                int(y),
-                                _month_to_number(m),
-                                int(d),
-                                tzinfo=HLTV_ZONEINFO,
-                            ).astimezone(LOCAL_ZONEINFO)
-                            entry["date"] = dt.strftime("%Y-%m-%d")
-                        except Exception as e:
-                            logging.warning(f"Failed to parse date '{txt}': {e}")
-
                     # Parse event
                     event = res.find("td", class_="event") or res.find(
                         "td", class_="placeholder-text-cell"
@@ -264,10 +246,28 @@ def get_results(state):
 # ================== MATCH DETAILS ================== #
 
 def parse_match_details(soup):
-    data = {"format": "", "stage": "", "veto": [], "maps": []}
+    data = {"date": "", "format": "", "stage": "", "veto": [], "maps": []}
 
     maps_section = soup.find("div", class_="col-6 col-7-small")
     format_boxes = maps_section.find_all("div", class_="standard-box veto-box")
+
+    
+
+        # Find the date div in the timeAndEvent section
+    time_and_event = soup.find("div", class_="timeAndEvent")
+    if not time_and_event:
+        data["date"] = "wtf1"
+        return None
+    
+    date_div = time_and_event.find("div", class_="date")
+    if not date_div or not date_div.get("data-unix"):
+        data["date"] = "wtf2"
+        return None
+    
+    # Unix timestamp is in milliseconds, convert to seconds
+    unix_ms = int(date_div["data-unix"])
+
+    data["date"] = unix_ms
 
     for box in format_boxes:
         format_text = box.find("div", class_="padding preformatted-text")
