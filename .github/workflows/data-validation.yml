@@ -33,7 +33,7 @@ jobs:
       run: python scripts/quality_report.py
 
     - name: Upload quality report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: data-quality-report
         path: |
