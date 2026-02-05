@@ -4,61 +4,61 @@
     "matches_with_odds": 0,
     "bookmakers": {},
     "teams": {},
-    "last_updated": "2026-02-05T02:30:12.843920"
+    "last_updated": "2026-02-05T08:00:12.891399"
   },
   "results": {
-    "total_matches": 200,
-    "enriched_matches": 200,
+    "total_matches": 23099,
+    "enriched_matches": 703,
     "events": {
-      "Exort Cataclysm Season 1": 34,
-      "FiRe CONTER Season 1": 25,
-      "IEM Kraków 2026": 24,
-      "CCT Season 3 Europe Series 14": 23,
-      "NODWIN Clutch Series 4": 19,
-      "CCT Season 3 Europe Series 15 Closed Qualifier": 12,
-      "European Pro League Series 4": 10,
-      "DFRAG Open Series 3": 10,
-      "IEM Kraków 2026 Stage 1": 10,
-      "CCT Season 3 South America Series 8": 7
+      "ESL Challenger League Season 48 South America": 254,
+      "ESL Challenger League Season 47 South America": 242,
+      "ESL Challenger League Season 48 North America": 228,
+      "ESL Challenger League Season 47 North America": 226,
+      "ESL Challenger League Season 49 North America": 224,
+      "ESL Challenger League Season 49 Asia-Pacific": 196,
+      "ESL Challenger League Season 49 South America": 146,
+      "ESL Challenger League Season 46 North America": 117,
+      "ESL Challenger League Season 48 Europe": 108,
+      "ESL Challenger League Season 47 Europe": 106
     },
     "teams": {
-      "Nemiga": 10,
-      "Nuclear TigeRES": 9,
-      "FAVBET": 8,
-      "ex-RUBY": 8,
-      "K27": 8,
-      "WHITEBIRD": 7,
-      "ARCRED": 7,
-      "Nemesis": 7,
-      "BET-M": 7,
-      "FORZE Reload": 6,
-      "Oramond": 6,
-      "magic": 6,
-      "Fingers Crossed": 6,
-      "Astralis": 6,
-      "1win": 6,
-      "RED Canids": 6,
-      "los kogutos": 5,
-      "AM": 5,
-      "9z": 5,
-      "WW": 5
+      "Zero Tenacity": 405,
+      "Sharks": 380,
+      "SINNERS": 379,
+      "ODDIK": 361,
+      "9INE": 346,
+      "Monte": 342,
+      "RED Canids": 341,
+      "Nexus": 337,
+      "ECLOT": 337,
+      "Sashi": 331,
+      "BESTIA": 330,
+      "paiN": 325,
+      "Fluxo": 316,
+      "EYEBALLERS": 315,
+      "Imperial": 311,
+      "Passion UA": 310,
+      "ECSTATIC": 306,
+      "Aurora": 306,
+      "CYBERSHOKE": 302,
+      "Alliance": 291
     },
     "date_range": {
-      "earliest": 1769698800000,
-      "latest": 1770244200000
+      "earliest": 1768474800000,
+      "latest": 1770255000000
     },
     "maps_played": {
-      "Nuke": 105,
-      "Dust2": 104,
-      "Ancient": 101,
-      "Mirage": 87,
-      "Overpass": 65,
-      "Inferno": 64,
-      "Anubis": 46,
-      "Default": 12,
-      "Train": 2
+      "Mirage": 330,
+      "Dust2": 326,
+      "Ancient": 325,
+      "Nuke": 307,
+      "Inferno": 222,
+      "Overpass": 202,
+      "Anubis": 145,
+      "Default": 41,
+      "Train": 21
     },
-    "last_updated": "2026-02-05T02:30:12.855367"
+    "last_updated": "2026-02-05T08:00:12.976871"
   },
-  "generated_at": "2026-02-05T02:30:12.856520"
+  "generated_at": "2026-02-05T08:00:13.010643"
 }
