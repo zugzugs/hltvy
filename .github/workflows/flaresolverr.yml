@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-  #schedule:
-    #- cron: '0 */4 * * *'   # Every 4 hours for better coverage
+  schedule:
+    - cron: '0 */6 * * *'   # Every 6 hours for better coverage
     #- cron: '30 8,14,20 * * *'  # Peak betting times (8:30, 14:30, 20:30 UTC)
 
 jobs:
