@@ -72,7 +72,7 @@ def get_parsed_page(url):
 
     for attempt in range(1, MAX_RETRIES + 1):
         try:
-            r = requests.post(FLARE_SOLVERR_URL, json=payload, timeout=20)
+            r = requests.post(FLARE_SOLVERR_URL, json=payload, timeout=50)
             r.raise_for_status()
             data = r.json()
 
