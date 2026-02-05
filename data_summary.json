@@ -4,11 +4,11 @@
     "matches_with_odds": 0,
     "bookmakers": {},
     "teams": {},
-    "last_updated": "2026-02-05T17:03:07.822507"
+    "last_updated": "2026-02-05T23:27:50.609546"
   },
   "results": {
-    "total_matches": 23107,
-    "enriched_matches": 2133,
+    "total_matches": 23114,
+    "enriched_matches": 3759,
     "events": {
       "ESL Challenger League Season 48 South America": 254,
       "ESL Challenger League Season 47 South America": 242,
@@ -26,7 +26,7 @@
       "Sharks": 380,
       "SINNERS": 379,
       "ODDIK": 361,
-      "9INE": 346,
+      "9INE": 347,
       "Monte": 342,
       "RED Canids": 341,
       "Nexus": 338,
@@ -34,32 +34,32 @@
       "Sashi": 331,
       "BESTIA": 330,
       "paiN": 325,
+      "EYEBALLERS": 316,
       "Fluxo": 316,
-      "EYEBALLERS": 315,
       "Imperial": 311,
       "Passion UA": 310,
-      "ECSTATIC": 307,
+      "ECSTATIC": 308,
       "Aurora": 306,
       "CYBERSHOKE": 302,
       "Alliance": 291
     },
     "date_range": {
-      "earliest": 1762516800000,
+      "earliest": 1758960000000,
       "latest": 1770255000000
     },
     "maps_played": {
-      "Ancient": 973,
-      "Mirage": 956,
-      "Dust2": 946,
-      "Nuke": 887,
-      "Inferno": 719,
-      "Overpass": 552,
-      "Train": 440,
+      "Ancient": 1764,
+      "Dust2": 1691,
+      "Mirage": 1690,
+      "Nuke": 1606,
+      "Inferno": 1313,
+      "Overpass": 963,
+      "Train": 886,
+      "Default": 274,
       "Anubis": 155,
-      "Default": 130,
-      "Cobblestone": 1
+      "Cobblestone": 2
     },
-    "last_updated": "2026-02-05T17:03:08.042920"
+    "last_updated": "2026-02-05T23:27:50.818787"
   },
-  "generated_at": "2026-02-05T17:03:08.117315"
+  "generated_at": "2026-02-05T23:27:50.877928"
 }
