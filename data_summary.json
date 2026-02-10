@@ -4,11 +4,11 @@
     "matches_with_odds": 0,
     "bookmakers": {},
     "teams": {},
-    "last_updated": "2026-02-09T23:13:35.779135"
+    "last_updated": "2026-02-10T06:18:18.853507"
   },
   "results": {
-    "total_matches": 23229,
-    "enriched_matches": 11152,
+    "total_matches": 23239,
+    "enriched_matches": 14950,
     "events": {
       "ESL Challenger League Season 48 South America": 254,
       "ESL Challenger League Season 47 South America": 242,
@@ -44,22 +44,22 @@
       "Alliance": 292
     },
     "date_range": {
-      "earliest": 1736550000000,
+      "earliest": 1723019400000,
       "latest": 1770255000000
     },
     "maps_played": {
-      "Ancient": 5442,
-      "Mirage": 4924,
-      "Dust2": 4668,
-      "Nuke": 4539,
-      "Inferno": 3696,
-      "Train": 2498,
-      "Anubis": 2130,
+      "Ancient": 7406,
+      "Mirage": 6467,
+      "Dust2": 5909,
+      "Nuke": 5810,
+      "Inferno": 4865,
+      "Anubis": 3801,
+      "Train": 2501,
       "Overpass": 1565,
-      "Default": 702,
-      "Cache": 6
+      "Default": 852,
+      "Vertigo": 705
     },
-    "last_updated": "2026-02-09T23:13:36.368749"
+    "last_updated": "2026-02-10T06:18:19.731240"
   },
-  "generated_at": "2026-02-09T23:13:36.484067"
+  "generated_at": "2026-02-10T06:18:19.868354"
 }
