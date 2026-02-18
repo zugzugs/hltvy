@@ -40,7 +40,7 @@ jobs:
           done
 
       - name: Run scraper
-        run: python scrape.py
+        run: python opcoming.py
 
       - name: Commit and push if changed
         run: |
